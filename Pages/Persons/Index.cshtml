@@ -1,0 +1,77 @@
+﻿@page
+@model MyDotnetCoreWebApp.Pages.Persons.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<a asp-page="Create">Create New</a>
+
+<table id ="myTable"class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].Birthdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].LivingCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person[0].ProfileImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "proccessing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "/persons",
+                type: 'POST',
+                headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
+            },
+            "columnDefs": [
+                {
+                    "targets": -1,
+                    "data": null,
+                    "render": function (data, type, row, meta) {
+                        return '';
+                    },
+                    "sortable": false
+                },
+                { "name": "ID", "data": "id", "targets": 0, "visible": false },
+                { "name": "Name", "data": "name", "targets": 1 },
+                { "name": "Surname", "data": "surname", "targets": 2 },
+                { "name": "Birthdate", "data": "birthdate", "targets": 3 },
+                { "name": "Gender", "data": "gender", "targets": 4 },
+                { "name": "LivingCity", "data": "livingCity", "targets": 5 },
+                { "name": "ProfileImagePath", "data": "profileImagePath", "targets": 6 }
+            ],
+            "order": [[0, "desc"]]
+        });
+    });
+    </script>
+}

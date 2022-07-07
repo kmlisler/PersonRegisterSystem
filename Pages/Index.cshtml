@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Person Registration System";
+}
+
+<div class="jumbotron">
+    <h1>Person Registration System</h1>
+</div>
+<div class="row">
+    
+    <div class="col-md-4">
+        <h2>Start Registration</h2>
+        <p>You can register a person with register button.</p>
+        <p>
+            <a class="btn btn-primary"
+               asp-page="/Persons/Create">
+                Register
+            </a>
+        </p>
+    </div>
+</div>
